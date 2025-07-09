@@ -1,24 +1,15 @@
-name: Rodar test.py com token.json
+name: Testar secret do ambiente staging
 
 on:
   workflow_dispatch:
 
 jobs:
-  run-test:
+  test-staging:
     runs-on: ubuntu-latest
+    environment: staging  # ← associa o job ao ambiente "staging"
 
     steps:
-      - name: Checkout do repositório
-        uses: actions/checkout@v4
-
-      - name: Criar token.json a partir do secret
-        run: |
-          echo "$TOKEN_JSON" > token.json
+      - name: Mostrar mensagem secreta do ambiente
+        run: echo "Mensagem do ambiente: $STAGING_MESSAGE"
         env:
-          TOKEN_JSON: ${{ secrets.TOKEN_JSON }}
-
-      - name: Rodar test.py
-        run: python3 test.py
-
-      - name: Mostrar conteúdo do test.txt (opcional, apenas para debug)
-        run: cat test.txt
+          STAGING_MESSAGE: ${{ secrets.STAGING_MESSAGE }}
