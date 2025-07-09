@@ -1,11 +1,10 @@
-file_name = "token.json"
-
-with open(file_name) as f:
-  text = f.read()
-
-print(text)
-
-print("finalizado")
-
-with open("test.txt", "w") as f:
-  f.write(text)
+import json
+import os
+# Alternativa 1: Ler do arquivo
+try:
+    with open("token.json") as f:
+        data = json.load(f)
+        print("Dados do token.json:")
+        print(f"Nome: {data}")
+except Exception as e:
+    print(f"Erro ao ler arquivo: {e}")
