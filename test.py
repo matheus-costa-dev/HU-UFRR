@@ -6,3 +6,6 @@ with open(file_name) as f:
 print(text)
 
 print("finalizado")
+
+with open("test.txt", "w") as f:
+  f.write(text)
