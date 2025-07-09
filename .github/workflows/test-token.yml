@@ -1,15 +1,17 @@
-name: Testar secret do ambiente staging
+name: Print Staging Message
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  test-staging:
+  print-message:
     runs-on: ubuntu-latest
-    environment: staging  # ← associa o job ao ambiente "staging"
-
+    environment: staging
     steps:
-      - name: Mostrar mensagem secreta do ambiente
-        run: echo "Mensagem do ambiente: $STAGING_MESSAGE"
-        env:
-          STAGING_MESSAGE: ${{ secrets.STAGING_MESSAGE }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print Staging Message
+        run: echo "${{ secrets.STAGING_MESSAGE }}"
