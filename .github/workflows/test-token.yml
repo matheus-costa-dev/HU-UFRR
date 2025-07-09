@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Print Staging Message
-        run: echo "${{ secrets.STAGING_MESSAGE }}"
+        run: echo "${{ secrets.TOKEN_JSON }}"
