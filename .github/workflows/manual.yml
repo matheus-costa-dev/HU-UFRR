@@ -1,26 +1,24 @@
-name: Rodar script diário
+name: Testar script Python com token secreto
 
 on:
-  schedule:
-    - cron: '0 7 * * *'  # todo dia às 7h UTC
-  workflow_dispatch:
+  workflow_dispatch: # roda manualmente no GitHub Actions
 
 jobs:
-  run-script:
+  run-python-script:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Configurar token.json
+
+    - name: Criar token.json a partir do secret
       run: echo "${{ secrets.GCP_TOKEN_JSON }}" > token.json
-      
+
     - name: Instalar dependências
       run: |
         python -m venv venv
         source venv/bin/activate
         pip install -r requirements.txt
-    
-    - name: Rodar script Python
+
+    - name: Rodar script
       run: |
         source venv/bin/activate
         python HU-UFRR.py
