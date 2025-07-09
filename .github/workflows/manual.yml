@@ -1,0 +1,26 @@
+name: Rodar script diário
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # todo dia às 7h UTC
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Configurar token.json
+      run: echo "${{ secrets.GCP_TOKEN_JSON }}" > token.json
+      
+    - name: Instalar dependências
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+    
+    - name: Rodar script Python
+      run: |
+        source venv/bin/activate
+        python HU-UFRR.py
