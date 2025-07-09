@@ -23,3 +23,6 @@ jobs:
         run: |
           printf "%s" "$TOKEN_JSON" > token.json
           python test.py
+
+      - name: Debug TOKEN_JSON
+        run: echo "$TOKEN_JSON"
