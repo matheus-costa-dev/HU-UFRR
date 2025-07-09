@@ -1,17 +1,25 @@
-name: Print Staging Message
+name: Process Token JSON
 
 on:
   push:
-    branches:
+    branches: 
       - main
 
 jobs:
-  print-message:
+  process-token:
     runs-on: ubuntu-latest
-    environment: staging
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Print Staging Message
-        run: echo "${{ secrets.TOKEN_JSON }}"
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Process token
+        env:
+          TOKEN_JSON: ${{ secrets.token_json }}
+        run: |
+          echo "$TOKEN_JSON" > token.json
+          python test.py
