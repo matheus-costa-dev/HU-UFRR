@@ -19,7 +19,7 @@ jobs:
 
       - name: Process token
         env:
-          TOKEN_JSON: ${{ secrets.token_json }}
+          TOKEN_JSON: ${{ secrets.TOKEN_JSON }}  # Corrigido para usar o nome correto da secret
         run: |
           printf "%s" "$TOKEN_JSON" > token.json
           python test.py
